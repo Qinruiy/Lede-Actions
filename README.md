@@ -1,0 +1,1 @@
+Action build lede for cr660x,ax6s

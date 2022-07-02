@@ -1,4 +1,4 @@
-name: Build cr660x
+name: Build ax6s
 
 on:
   repository_dispatch:
@@ -12,7 +12,7 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: .config
+  CONFIG_FILE: config/ax6s.config
   UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
 
@@ -100,8 +100,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.tag.outputs.release_tag }}
+          tag_name: lede for ax6s
           files: ${{ env.FIRMWARE }}/*
+          body: ${{ steps.tag.outputs.release_tag }}
 
       - name: Delete workflow runs
         uses: GitRML/delete-workflow-runs@main
@@ -113,7 +114,7 @@ jobs:
         uses: dev-drprasad/delete-older-releases@v0.1.0
         if: (!cancelled())
         with:
-          keep_latest: 3
+          keep_latest: 8
           delete_tags: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
