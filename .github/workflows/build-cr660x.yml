@@ -100,7 +100,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: lede for cr660x
+          tag_name: ${{ steps.tag.outputs.release_tag }}
+          name: lede for ${{ env.DEVICE_NAME }}
           files: ${{ env.FIRMWARE }}/*
           body: ${{ steps.tag.outputs.release_tag }}
 
